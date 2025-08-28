@@ -9,6 +9,7 @@ const listingSchema = new Schema({
     description:String,
     image:{
         type:String,
+        default:"https://unsplash.com/photos/round-dining-table-set-with-various-dishes-and-drinks-uVOlW570gGw",
         set:(v) => v === "" ?"https://unsplash.com/photos/round-dining-table-set-with-various-dishes-and-drinks-uVOlW570gGw":v,
     },
     price:Number,
@@ -17,4 +18,4 @@ const listingSchema = new Schema({
 });
 
 const Listing  = mongoose.model("listing",listingSchema);
-modules.exports = Listing;
+module.exports = Listing;
