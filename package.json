@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/dipen223/airbnbClone/issues"
   },
-  "homepage": "https://github.com/dipen223/airbnbClone#readme"
+  "homepage": "https://github.com/dipen223/airbnbClone#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
 }
