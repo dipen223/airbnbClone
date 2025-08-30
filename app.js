@@ -33,6 +33,11 @@ app.get("/listings",async (req,res) =>{
 });
 
 
+// new route 
+app.get("/listings/new",(req,res) =>{
+    res.render("listings/new.ejs");
+});
+
 // show Route
 app.get("/listings/:id",async(req,res) => {
     let {id} = req.params;
@@ -40,6 +45,8 @@ app.get("/listings/:id",async(req,res) => {
     res.render("listings/show.ejs",{listing});
 })
 
+
+
 app.listen(8080,() =>{
     console.log("server is listening to port 8080");
-})
+});
