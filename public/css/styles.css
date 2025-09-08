@@ -118,7 +118,21 @@ body{
 }
 
 
+/* show page */
+.show-img{
+    height:30vh;
+    
 
+}
+
+.btns{
+    display:flex;
+}
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}
 @media (max-width: 768px) {
   .f-info {
     justify-content: space-around;
