@@ -8,7 +8,6 @@ const ejsMate  = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const expressError = require("./utils/expressError.js");
 
-
 const MONGO_URL = "mongodb://127.0.0.1:27017/myairbnb";
 
 main().then(() =>{
@@ -89,13 +88,18 @@ app.delete("/listings/:id",wrapAsync(async(req,res) =>{
     res.redirect("/listings");
 }));
 
+//I am getting an errro whenever i am trying to use this.
+// app.all("*",(req,res,next) =>{
+//     next(new expressError(404,"Page Not Found"));
+// })
+
 app.use((req, res, next) => {
     res.status(404).send("Page Not Found");
 });
 
 app.use((err,req,res,next) =>{
     let {statusCode = 500,message="Something went wrong"} = err;
-    res.status(statusCode).send(message);
+   res.status(statusCode).render("error.ejs",{message});
 });
 
 app.listen(8080,() =>{
