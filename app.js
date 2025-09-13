@@ -8,8 +8,9 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const expressError = require("./utils/expressError.js");
 const { listingSchema } = require("./schema.js");
+const Review = require("./models/review.js")
+  
 const MONGO_URL = "mongodb://127.0.0.1:27017/myairbnb";
-
 main().then(() => {
     console.log("connected to DB");
 }).catch((err) => {
@@ -96,7 +97,22 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 //I am getting an errro whenever i am trying to use this.
 // app.all("*",(req,res,next) =>{
 //     next(new expressError(404,"Page Not Found"));
-// })
+// });
+
+// Reviews  ~post route
+app.post("/listings/:id/reviews",async(req,res) =>{
+    let listing  = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+    
+    await newReview.save();
+    await listing.save();
+
+    console.log("new review saved");
+    res.redirect(`/listings/${listing._id}`)
+
+});
+
 
 app.use((req, res, next) => {
     res.status(404).send("Page Not Found");
