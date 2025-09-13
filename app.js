@@ -110,7 +110,8 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 //     next(new expressError(404,"Page Not Found"));
 // });
 
-// Reviews  ~post route
+// Reviews 
+//  ~post route
 app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res) =>{
     let listing  = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
@@ -121,6 +122,14 @@ app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res) =>{
     console.log("new review saved");
     res.redirect(`/listings/${listing._id}`)
 
+}));
+
+// delete review route
+app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res) => {
+    let {id,reviewId} = req.params;
+    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Review.findById(reviewId);
+    res.redirect(`/listings/${id}`);
 }));
 
 
