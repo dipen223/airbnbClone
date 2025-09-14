@@ -8,6 +8,7 @@ const expressError = require("./utils/expressError.js");
 const session = require("express-session");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
+const flash = require("connect-flash");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/myairbnb";
 main().then(() => {
@@ -37,11 +38,19 @@ const sessionOptions = {
     }
 };
 
-app.use(session(sessionOptions));
-
 app.get("/", (req, res) => {
     res.send("Ready to serve");
 });
+
+app.use(session(sessionOptions));
+app.use(flash())
+
+
+app.use((req,res,next) =>{
+    res.locals.success = req.flash("success");
+    next();
+})
+
 
 app.use("/listings",listings);
 app.use("/listings/:id/reviews",reviews);
