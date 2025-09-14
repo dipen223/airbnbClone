@@ -15,7 +15,6 @@ const validateReview = (req, res, next) => {
     else{
         next();
     }
-
 }
 
 // post review
