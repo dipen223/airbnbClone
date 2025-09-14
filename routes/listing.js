@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
-const { listingSchema,reviewSchema} = require("../schema.js");
+const { listingSchema} = require("../schema.js");
 const Listing = require("../models/listing.js");
 const expressError = require("../utils/expressError.js");
 
@@ -34,7 +34,6 @@ router.get("/:id", wrapAsync(async (req, res) => {
     const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show.ejs", { listing });
 }));
-
 
 
 // Create Route
