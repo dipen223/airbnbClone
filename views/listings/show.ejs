@@ -8,13 +8,11 @@
         <div class="card col-6 offset-3 show-card">
             <img src="<%=listing.image%>" alt="listing_image" class="card-img-top show-img">
             <div class="card-body">
-                <p class="card-text">
-                    <%= listing.description%> <br>
-                        $<%= listing.price.toLocaleString("en-US")%> <br>
-                            <%= listing.location%> <br>
-                                <%= listing.country%>
-
-                </p>
+                <p class="card-text"> Owned by <b><%=listing.owner.username%></b></p>
+                    <p class="card-text"><%= listing.description%> </p>
+                    <p class="card-text">$<%= listing.price.toLocaleString("en-US")%> </p>
+                    <p class="card-text"><%= listing.location%></p>
+                    <p class="card-text"><%= listing.country%></p>       
             </div>
 
         </div>
