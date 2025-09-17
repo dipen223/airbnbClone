@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const { saveRedirectUrl } = require("../middleware.js");
+const session = require("express-session");
 
 
 router.get("/signup",(req,res) =>{
@@ -35,10 +37,11 @@ router.get("/login",(req,res) =>{
     res.render("users/login.ejs");
 });
 
-router.post("/login",passport.authenticate("local",{failureRedirect:'/login',failureFlash:true}),async(req,res) =>{
-
+router.post("/login",saveRedirectUrl,
+    passport.authenticate("local",{failureRedirect:'/login',failureFlash:true}),async(req,res) =>{
     req.flash("success","Welcome back to Airbnb!");
-    res.redirect("/listings");
+    let redirectUrl  = res.locals.redirectUrl || "/listings";
+    res.redirect(redirectUrl);
 
 });
 
@@ -50,6 +53,6 @@ router.get("/logout",(req,res,next) =>{
         }
         req.flash("success","You are logged out! ");
         res.redirect("/listings");
-    })
-})
+    });
+});
 module.exports = router;
