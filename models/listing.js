@@ -9,9 +9,8 @@ const listingSchema = new Schema({
     },
     description:String,
     image:{
-        type:String,
-        default:"https://unsplash.com/photos/round-dining-table-set-with-various-dishes-and-drinks-uVOlW570gGw",
-        set:(v) => v === "" ?"https://unsplash.com/photos/round-dining-table-set-with-various-dishes-and-drinks-uVOlW570gGw":v,
+       url:String,
+       filename:String,
     },
     price:Number,
     location:String,
