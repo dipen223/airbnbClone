@@ -7,11 +7,93 @@ body{
     flex:1;
 }
 .navbar{
-    height:5rem;
+    height:10rem;
     background-color: white;
 
 }
 
+.top-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:12px;
+}
+.bottom-nav{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    width:40rem;
+    gap:12px;
+  
+    padding:0rem 2rem;
+   border-radius:9999px;
+  box-shadow: 0 2px 8px 1px rgba(0,0,0,0.2)
+}
+
+.top-nav i, 
+.top-nav svg {
+  width: 25px;   /* make icons uniform */
+  height: 25px;
+}
+
+.home,.experiences,.services{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2px;
+}
+.experiences,.services{
+    opacity: 0.7;
+}
+.experiences:hover,.services:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+.home{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.who{
+    display: flex;
+    align-items: center;
+gap:20px;
+}
+
+.who span{
+    width:28px;
+    height:28px;
+    border-radius: 50%;
+   background-color: #ff385c;
+}
+.who i{
+    color:white;
+    width:28px;
+    height:28px;
+}
+.who:hover{
+    cursor: pointer;
+}
+.where,.check-in,.check-out,.who{
+    transition: background-color 0.2s ease;
+
+}
+.where:hover,.check-in:hover,.check-out:hover,.who:hover{
+    cursor:pointer;
+    background-color: #f7f7f7;
+    border-radius:99999px;
+}
+
+
+.navbar-section{
+   
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+}
+.top-nav svg{
+    width:25px;
+}
 .fa-airbnb{
     color:#fe424d;
     font-size:2rem;
