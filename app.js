@@ -10,6 +10,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const expressError = require("./utils/expressError.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo')
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
@@ -19,7 +20,9 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const User  = require("./models/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/myairbnb";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/myairbnb";
+const dbUrl  = process.env.ATLASDB_URL;
+
 main().then(() => {
     console.log("connected to DB");
 }).catch((err) => {
@@ -27,7 +30,7 @@ main().then(() => {
 });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -36,7 +39,20 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+const store = MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:"mysupersecretcode"
+    },
+    touchAfter:24*60*60,
+});
+
+store.on("error",() =>{
+    console.log("error in mongo session store",err);
+})
 const sessionOptions = {
+    store,
     secret:"mysupersecretcode",
     resave:false,
     saveUninitialized:true,
@@ -47,9 +63,7 @@ const sessionOptions = {
     }
 };
 
-// app.get("/", (req, res) => {
-//     res.send("Ready to serve");
-// });
+
 
 app.use(session(sessionOptions));
 app.use(flash());
