@@ -73,19 +73,13 @@ gap:20px;
 .who:hover{
     cursor: pointer;
 }
-.where,.check-in,.check-out,.who{
-    transition: background-color 0.2s ease;
-
-}
 .where:hover,.check-in:hover,.check-out:hover,.who:hover{
-    cursor:pointer;
-    background-color: #f7f7f7;
-    border-radius:99999px;
+    opacity: 0.5;
 }
 
 
 .navbar-section{
-   
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
